@@ -1,0 +1,75 @@
+.container-materi {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 80vh;
+  margin-top: 2em;
+  padding: 0 4em;
+  justify-content: space-between;
+}
+
+.container-materi .container-main {
+  height: auto;
+  display: flex;
+}
+
+.materi-image {
+  width: 50%;
+  height: 80px;
+}
+
+.materi-image img {
+  float: left;
+}
+
+.text-section {
+  width: 50%;
+}
+
+.container-materi .deskripsi {
+  white-space: pre-line;
+}
+
+.container-bottom {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2em;
+  gap: 1em;
+}
+
+.uploader-bottom {
+  display: flex;
+  align-items: center;
+  margin-left: 2em;
+}
+
+.uploader-bottom .fa-user {
+  font-size: 3em;
+}
+
+.uploader-bottom p {
+  font-size: 20px;
+}
+
+.container-bottom .button-bottom {
+  margin-right: 2em;
+}
+
+.container-bottom button {
+  margin-left: 1em;
+  background-color: #466051;
+  color: #fffff0;
+  font-weight: 800;
+  width: 10em;
+  padding: 1em 1.5em;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.container-bottom .back:nth-child(1) {
+  background-color: rgb(220, 8, 8);
+}
