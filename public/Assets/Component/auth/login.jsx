@@ -51,11 +51,10 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         if (res.data.payload.statusCode === 200) {
-          localStorage.setItem("user", JSON.stringify(res.data));
-          alert("Login successful");
-          navigate("/");
+          alert("Register successful");
+          navigate("/login");
         } else {
-          alert("Login failed");
+          alert("Register failed");
         }
       })
       .catch((err) => console.error(err));

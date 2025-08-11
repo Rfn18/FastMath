@@ -134,7 +134,7 @@ const Parralax1 = () => {
               <p class="description">Menghitung tabungan dan hasil investasi</p>
               <div class="item-bottom">
                 {localStorage.getItem("user") ? (
-                  <Link to={`/materi/${item.ID}`}>
+                  <Link to={`/soal-latihan1`}>
                     <button>start</button>
                   </Link>
                 ) : (
