@@ -10,7 +10,7 @@ import AboutUs from "../public/Assets/Component/about_us";
 import Materi from "../public/Assets/Component/detail_materi";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/FastMath">
     <Routes>
       <Route path="/" element={<App />} />,
       <Route path="/soal-latihan1" element={<SoalLatihan />} />
