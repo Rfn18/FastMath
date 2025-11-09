@@ -48,7 +48,7 @@ const AboutUs = () => {
               key={index}
               className="team-card bg-white p-6 shadow-md hover:shadow-lg"
             >
-              <div className="w-full h-60 mb-4 rounded-lg overflow-hidden cursor-pointer">
+              <div className="w-full h-60 mb-4 rounded-lg overflow-hidden cursor-pointer about-image">
                 <img
                   src={member.img}
                   alt={member.alt}

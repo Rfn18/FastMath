@@ -37,7 +37,6 @@
 .container-card {
   display: flex;
 }
-
-img {
+.about-image img {
   width: 20px;
 }

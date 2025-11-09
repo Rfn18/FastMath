@@ -15,8 +15,8 @@ const Profile = () => {
       <div className="profile-container">
         <div className="profile-box">
           <i className="fa-solid fa-user"></i>
-          <h1>{user.payload.data[0].nama}</h1>
-          <p>{user.payload.data[0].email}</p>
+          <h1>{user.data.nama}</h1>
+          <p>{user.data.email}</p>
           <button onClick={handleLogout}>logout</button>
           <Link to="/">
             <p>Back</p>

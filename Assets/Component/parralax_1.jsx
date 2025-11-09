@@ -43,7 +43,7 @@ const Parralax1 = () => {
     const fetchCourse = async () => {
       try {
         const res = await axios("http://localhost:3000/course/materi");
-        setCourse(res.data.payload.data);
+        setCourse(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -51,11 +51,13 @@ const Parralax1 = () => {
     fetchCourse();
   }, []);
 
+  console.log(course);
+
   useEffect(() => {
     const fetchCourse = async () => {
       try {
         const res = await axios("http://localhost:3000/course/contoh-soal");
-        setCourseContohSoal(res.data.payload.data);
+        setCourseContohSoal(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -89,7 +91,7 @@ const Parralax1 = () => {
                 <p class="description">{item.deskripsi}</p>
                 <div class="item-bottom">
                   {localStorage.getItem("user") ? (
-                    <Link to={`/materi/${item.ID}`}>
+                    <Link to={`/materi/${item.id}`}>
                       <button>start</button>
                     </Link>
                   ) : (
@@ -112,7 +114,7 @@ const Parralax1 = () => {
                 <p class="description">{item.deskripsi}</p>
                 <div class="item-bottom">
                   {localStorage.getItem("user") ? (
-                    <Link to={`/materi/${item.ID}`}>
+                    <Link to={`/materi/${item.id}`}>
                       <button>start</button>
                     </Link>
                   ) : (

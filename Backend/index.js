@@ -9,14 +9,12 @@ const port = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// ✅ Ambil semua data user
 app.get("/data", async (req, res) => {
   const { data, error } = await supabase.from("user_data").select("*");
   if (error) return res.status(500).json({ error: error.message });
   res.json(data);
 });
 
-// ✅ Register user
 app.post("/register", async (req, res) => {
   const { nama, email, password } = req.body;
   const { data, error } = await supabase
@@ -26,7 +24,6 @@ app.post("/register", async (req, res) => {
   res.status(200).json({ message: "User registered successfully", response });
 });
 
-// ✅ Login user
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const { data, error } = await supabase
@@ -42,24 +39,21 @@ app.post("/login", async (req, res) => {
   res.json({ message: "Login successful", data });
 });
 
-// ✅ Tambah course
 app.post("/addcourse", async (req, res) => {
-  const { judul, isi, tanggal, gambar } = req.body;
+  const { judul, deskripsi, uploader, gambar } = req.body;
   const { data, error } = await supabase
     .from("course")
-    .insert([{ judul, isi, tanggal, gambar }]);
+    .insert([{ judul, deskripsi, uploader, gambar }]);
   if (error) return res.status(500).json({ error: error.message });
   res.status(200).json({ message: "Course added successfully", data });
 });
 
-// ✅ Ambil semua course
 app.get("/course", async (req, res) => {
   const { data, error } = await supabase.from("course").select("*");
   if (error) return res.status(500).json({ error: error.message });
   res.json(data);
 });
 
-// ✅ Ambil course berdasarkan kategori
 app.get("/course/:kategori", async (req, res) => {
   const { kategori } = req.params;
   const { data, error } = await supabase
@@ -70,34 +64,31 @@ app.get("/course/:kategori", async (req, res) => {
   res.json(data);
 });
 
-// ✅ Ambil course berdasarkan ID
 app.get("/course/id/:id", async (req, res) => {
-  const { id } = req.params;
+  const id = req.params.id;
   const { data, error } = await supabase
     .from("course")
     .select("*")
     .eq("id", id)
     .single();
   if (error) return res.status(500).json({ error: error.message });
-  res.json(data);
+  res.json(data, `id adalah ${id}`);
 });
 
-// ✅ Update course
-app.put("/course/:id", async (req, res) => {
-  const { id } = req.params;
-  const { judul, isi, tanggal, gambar } = req.body;
+app.put("/course/:ID", async (req, res) => {
+  const { ID } = req.params;
+  const { judul, deskripsi, uploader, gambar } = req.body;
   const { data, error } = await supabase
     .from("course")
-    .update({ judul, isi, tanggal, gambar })
-    .eq("id", id);
+    .update({ judul, deskripsi, uploader, gambar })
+    .eq("ID", ID);
   if (error) return res.status(500).json({ error: error.message });
   res.json({ message: "Course updated successfully", data });
 });
 
-// ✅ Hapus course
-app.delete("/course/:id", async (req, res) => {
-  const { id } = req.params;
-  const { data, error } = await supabase.from("course").delete().eq("id", id);
+app.delete("/course/:ID", async (req, res) => {
+  const { ID } = req.params;
+  const { data, error } = await supabase.from("course").delete().eq("ID", ID);
   if (error) return res.status(500).json({ error: error.message });
   res.json({ message: "Course deleted successfully", data });
 });

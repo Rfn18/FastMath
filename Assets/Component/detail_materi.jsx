@@ -11,17 +11,19 @@ const Materi = () => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await axios(`http://localhost:3000/course/${id}`);
-        setCourse(res.data.payload.data[0]);
+        const res = await axios(`http://localhost:3000/course/id/${id}`);
+        setCourse(res.data);
+        console.log(res);
       } catch (err) {
         console.log(err);
       }
     };
     fetchCourse();
   }, [id]);
+  console.log(course);
   if (!course) return <p>Loading...</p>;
 
-  const lanjut = course.ID + 1;
+  const lanjut = course.id + 1;
 
   return (
     <>
