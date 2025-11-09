@@ -1,7 +1,7 @@
-import Fasterino from "../Image/team/Fasterino.jpg";
-import Rehan from "../Image/team/Pak_poh.jpg";
-import Rosyad from "../Image/team/Rosyad.jpg";
-import Nazwa from "../Image/team/Nazwa.jpg";
+import Fasterino from "/Image/team/Fasterino.jpg";
+import Rehan from "/Image/team/Pak_poh.jpg";
+import Rosyad from "/Image/team/Rosyad.jpg";
+import Nazwa from "/Image/team/Nazwa.jpg";
 import Header from "./header";
 import "./about_us.css";
 import Footer from "./footer";
@@ -42,7 +42,7 @@ const AboutUs = () => {
       <Header />
       <div className="container-aboutUs">
         <h1 className="title">About Us</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 mt-7 lg:grid-cols-4 gap-5">
+        <div className="container-card">
           {TeamBers.map((member, index) => (
             <div
               key={index}
@@ -69,6 +69,7 @@ const AboutUs = () => {
           ))}
         </div>
       </div>
+
       <Footer />
     </>
   );

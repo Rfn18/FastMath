@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import "../../../src/App.css";
+import "../../src/App.css";
 import Header from "./header";
-
 
 const Profile = () => {
   const user = JSON.parse(localStorage.getItem("user"));

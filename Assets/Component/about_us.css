@@ -33,3 +33,11 @@
   flex-direction: column;
   align-items: center;
 }
+
+.container-card {
+  display: flex;
+}
+
+img {
+  width: 20px;
+}

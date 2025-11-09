@@ -601,6 +601,7 @@ footer p {
 footer ul {
   display: flex;
   gap: 2em;
+  list-style: none;
 }
 
 footer ul li .fa-brands {
@@ -610,6 +611,7 @@ footer ul li .fa-brands {
   -moz-transition: ease 0.3s;
   -ms-transition: ease 0.3s;
   -o-transition: ease 0.3s;
+  color: #fff;
 }
 
 footer ul li .fa-brands:hover {

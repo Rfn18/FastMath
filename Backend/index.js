@@ -1,154 +1,105 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const supabase = require("./component/supabaseClient");
 const response = require("./component/response");
-const db = require("./component/connection");
 const app = express();
 const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get("/data", (req, res) => {
-  const sql = "SELECT * FROM user_data";
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send("Error retrieving data");
-    } else {
-      res.json(result);
-    }
-  });
+// ✅ Ambil semua data user
+app.get("/data", async (req, res) => {
+  const { data, error } = await supabase.from("user_data").select("*");
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
 });
 
-app.post("/register", (req, res) => {
+// ✅ Register user
+app.post("/register", async (req, res) => {
   const { nama, email, password } = req.body;
-  const sql = "INSERT INTO user_data (nama, email, password) VALUES (?, ?, ?)";
-  db.query(sql, [nama, email, password], (err, result) => {
-    if (err) {
-      console.error(err);
-      response(500, null, "Error retrieving data", res);
-    } else if (result && result.affectedRows > 0) {
-      response(200, result, "User registered successfully", res);
-    } else {
-      response(401, null, "Invalid credentials", res);
-    }
-  });
+  const { data, error } = await supabase
+    .from("user_data")
+    .insert([{ nama, email, password }]);
+  if (error) return res.status(500).json({ error: error.message });
+  res.status(200).json({ message: "User registered successfully", response });
 });
 
-app.post("/login", (req, res) => {
+// ✅ Login user
+app.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  const sql = "SELECT * FROM user_data WHERE email = ? AND password = ?";
-  db.query(sql, [email, password], (err, result) => {
-    if (err) {
-      console.error(err);
-      response(500, null, "Error retrieving data", res);
-    } else if (result && result.length > 0) {
-      response(200, result, "Login successful", res);
-    } else {
-      response(401, null, "Invalid credentials", res);
-    }
-  });
+  const { data, error } = await supabase
+    .from("user_data")
+    .select("*")
+    .eq("email", email)
+    .eq("password", password)
+    .single();
+
+  if (error || !data)
+    return res.status(401).json({ message: "Invalid credentials" });
+
+  res.json({ message: "Login successful", data });
 });
 
-app.post("/addcourse", (req, res) => {
+// ✅ Tambah course
+app.post("/addcourse", async (req, res) => {
   const { judul, isi, tanggal, gambar } = req.body;
-  const sql =
-    "INSERT INTO course (judul, isi, tanggal, gambar) VALUES (?, ?, ?, ?)";
-  db.query(sql, [judul, isi, tanggal, gambar], (err, result) => {
-    if (err) {
-      console.error(err);
-      response(500, null, "Error retrieving data", res);
-    } else if (result && result.affectedRows > 0) {
-      response(200, result, "News added successfully", res);
-    } else {
-      response(401, null, "Invalid credentials", res);
-    }
-  });
+  const { data, error } = await supabase
+    .from("course")
+    .insert([{ judul, isi, tanggal, gambar }]);
+  if (error) return res.status(500).json({ error: error.message });
+  res.status(200).json({ message: "Course added successfully", data });
 });
 
-app.get("/course", (req, res) => {
-  const sql = "SELECT * FROM course";
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error(err);
-      response(500, null, "Error retrieving data", res);
-    } else {
-      response(200, result, "Data retrieved successfully", res);
-    }
-  });
+// ✅ Ambil semua course
+app.get("/course", async (req, res) => {
+  const { data, error } = await supabase.from("course").select("*");
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
 });
 
-app.get("/course/materi", (req, res) => {
-  const sql = "SELECT * FROM course WHERE kategori = 'materi'";
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error(err);
-      response(500, null, "Error retrieving data", res);
-    } else {
-      response(200, result, "Data retrieved successfully", res);
-    }
-  });
+// ✅ Ambil course berdasarkan kategori
+app.get("/course/:kategori", async (req, res) => {
+  const { kategori } = req.params;
+  const { data, error } = await supabase
+    .from("course")
+    .select("*")
+    .eq("kategori", kategori);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
 });
 
-app.get("/course/contoh-soal", (req, res) => {
-  const sql = "SELECT * FROM course WHERE kategori = 'contoh-soal'";
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error(err);
-      response(500, null, "Error retrieving data", res);
-    } else {
-      response(200, result, "Data retrieved successfully", res);
-    }
-  });
-});
-
-app.get("/course/:id", (req, res) => {
+// ✅ Ambil course berdasarkan ID
+app.get("/course/id/:id", async (req, res) => {
   const { id } = req.params;
-  const sql = "SELECT * FROM course WHERE ID = ?";
-  db.query(sql, [id], (err, result) => {
-    if (err) {
-      console.error(err);
-      response(500, null, "Error retrieving data", res);
-    } else if (result && result.length > 0) {
-      response(200, result, "Data retrieved successfully", res);
-    } else {
-      response(401, null, "Invalid credentials", res);
-    }
-  });
+  const { data, error } = await supabase
+    .from("course")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
 });
 
-app.put("/course/:id", (req, res) => {
+// ✅ Update course
+app.put("/course/:id", async (req, res) => {
   const { id } = req.params;
   const { judul, isi, tanggal, gambar } = req.body;
-  const sql =
-    "UPDATE news SET judul = ?, isi = ?, tanggal = ?, gambar = ? WHERE id_berita = ?";
-  db.query(sql, [judul, isi, tanggal, gambar, id], (err, result) => {
-    if (err) {
-      console.error(err);
-      response(500, null, "Error retrieving data", res);
-    } else if (result && result.affectedRows > 0) {
-      response(200, result, "News updated successfully", res);
-    } else {
-      response(401, null, "Invalid credentials", res);
-    }
-  });
+  const { data, error } = await supabase
+    .from("course")
+    .update({ judul, isi, tanggal, gambar })
+    .eq("id", id);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ message: "Course updated successfully", data });
 });
 
-app.delete("/courses/:id", (req, res) => {
+// ✅ Hapus course
+app.delete("/course/:id", async (req, res) => {
   const { id } = req.params;
-  const sql = "DELETE FROM news WHERE id_berita = ?";
-  db.query(sql, [id], (err, result) => {
-    if (err) {
-      console.error(err);
-      response(500, null, "Error retrieving data", res);
-    } else if (result && result.affectedRows > 0) {
-      response(200, result, "News deleted successfully", res);
-    } else {
-      response(401, null, "Invalid credentials", res);
-    }
-  });
+  const { data, error } = await supabase.from("course").delete().eq("id", id);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ message: "Course deleted successfully", data });
 });
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+
+app.listen(port, () => console.log(`Server running on port ${port}`));

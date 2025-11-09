@@ -33,7 +33,7 @@ const Login = () => {
       .post("http://localhost:3000/login", values)
       .then((res) => {
         console.log(res);
-        if (res.data.payload.statusCode === 200) {
+        if (res.status === 200) {
           localStorage.setItem("user", JSON.stringify(res.data));
           alert("Login successful");
           navigate("/");
@@ -50,7 +50,7 @@ const Login = () => {
       .post("http://localhost:3000/register", values)
       .then((res) => {
         console.log(res);
-        if (res.data.payload.statusCode === 200) {
+        if (res.status === 200) {
           alert("Register successful");
           navigate("/login");
         } else {

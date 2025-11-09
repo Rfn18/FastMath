@@ -1,4 +1,4 @@
-import "../../../src/App.css";
+import "../../src/App.css";
 import Header from "./header";
 
 const ParralaxMain = () => (
@@ -20,7 +20,7 @@ const ParralaxMain = () => (
         </div>
         <div class="img">
           <img
-            src="/Assets/Image/MathCyber.png"
+            src="Image/MathCyber.png"
             alt="Logo Match Cyber"
             width="250"
             height="auto"
@@ -30,10 +30,10 @@ const ParralaxMain = () => (
       <div class="sponsor">
         <div class="main-sponsor">
           <span>Inspired By</span>
-          <img src="/Assets/Image/DeepAI.png" alt="" />
-          <img src="/Assets/Image/MathCity.png" alt="" />
-          <img src="/Assets/Image/MathCyber.png" alt="" />
-          <img src="/Assets/Image/MathOS.png" alt="" />
+          <img src="Image/DeepAI.png" alt="" />
+          <img src="Image/MathCity.png" alt="" />
+          <img src="Image/MathCyber.png" alt="" />
+          <img src="Image/MathOS.png" alt="" />
         </div>
       </div>
     </div>

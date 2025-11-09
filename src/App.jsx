@@ -1,8 +1,8 @@
 import "./App.css";
-import ParralaxMain from "../public/Assets/Component/parralax_main";
-import Parralax1 from "../public/Assets/Component/parralax_1";
-import Parralax2 from "../public/Assets/Component/parralax_2";
-import Footer from "../public/Assets/Component/footer";
+import ParralaxMain from "../Assets/Component/parralax_main";
+import Parralax1 from "../Assets/Component/parralax_1";
+import Parralax2 from "../Assets/Component/parralax_2";
+import Footer from "../Assets/Component/footer";
 
 function App() {
   return (
