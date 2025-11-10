@@ -11,7 +11,9 @@ const Materi = () => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await axios(`http://localhost:3000/course/id/${id}`);
+        const res = await axios(
+          `https://fast-math-backend.vercel.app/course/id/${id}`
+        );
         setCourse(res.data);
         console.log(res);
       } catch (err) {

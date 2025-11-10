@@ -42,7 +42,9 @@ const Parralax1 = () => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await axios("http://localhost:3000/course/materi");
+        const res = await axios(
+          "https://fast-math-backend.vercel.app/course/materi"
+        );
         setCourse(res.data);
       } catch (err) {
         console.log(err);
@@ -56,7 +58,9 @@ const Parralax1 = () => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await axios("http://localhost:3000/course/contoh-soal");
+        const res = await axios(
+          "https://fast-math-backend.vercel.app/course/contoh-soal"
+        );
         setCourseContohSoal(res.data);
       } catch (err) {
         console.log(err);
