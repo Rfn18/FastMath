@@ -30,7 +30,7 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3000/login", values)
+      .post("https://fast-math-backend.vercel.app/login", values)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
@@ -47,7 +47,7 @@ const Login = () => {
   const handleSubmitRegister = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/register", values)
+      .post("https://fast-math-backend.vercel.app/register", values)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
